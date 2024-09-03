@@ -1,28 +1,27 @@
 from typing import List
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class Cliente (BaseModel):
-    id: None | str = None
+    id: None | int = None
     nome: str
     telefone: str
     email: str
     endereco: str
     cidade: str
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class Animal (BaseModel):
-    id: str
-    cliente: Cliente
+    id: None | int = None
+    cliente_id: int
     nome: str 
     especie: str
     raca: str
     idade: int
+    cliente: None | Cliente = None
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
     
 class Veterinario (BaseModel):
     id: str
@@ -32,8 +31,7 @@ class Veterinario (BaseModel):
     endereco: str
     cidade: str
 
-    class Config:
-        orm_mode = True
+    
 
 class Consulta (BaseModel):
     id : str
@@ -44,8 +42,7 @@ class Consulta (BaseModel):
     diagnostico: str
     tratamento: str
 
-    class Config:
-        orm_mode = True
+    
 
 class Produto (BaseModel):
     id: str
@@ -54,8 +51,7 @@ class Produto (BaseModel):
     preco: float
     quantidade: int
 
-    class Config:
-        orm_mode = True
+    
 
 class Venda (BaseModel):
     id: str
@@ -64,6 +60,5 @@ class Venda (BaseModel):
     produtos: List[Produto]
     valor: float
 
-    class Config:
-        orm_mode = True
+   
 

@@ -18,3 +18,9 @@ class repositorioClientes:
         clientes = self.db.query(models.Cliente).all()
         return clientes
     
+    def deletar_cliente(self, cliente_id: int):
+        cliente_deletado = self.db.query(models.Cliente).filter(models.Cliente.id == cliente_id).first()
+        self.db.delete(cliente_deletado)
+        self.db.commit()
+        return cliente_deletado
+    
